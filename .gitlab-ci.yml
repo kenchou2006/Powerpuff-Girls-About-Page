@@ -1,0 +1,40 @@
+image: dart:stable
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - .pub-cache/
+
+before_script:
+  - apt-get update && apt-get install -y curl unzip xz-utils
+  - curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.29.0-stable.tar.xz | tar xJ
+  - export PATH="$PWD/flutter/bin:$PATH"
+  - git config --global --add safe.directory "$PWD/flutter"
+  - flutter doctor
+  - flutter config --enable-web
+  - flutter pub get
+
+build:
+  stage: build
+  script:
+    - echo "CI_PROJECT_PATH_SLUG=$CI_PROJECT_PATH_SLUG"
+    - flutter build web --release
+    - mv build/web public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
+pages:
+  stage: deploy
+  script:
+    - echo "The site will be deployed to $CI_PAGES_URL"
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
