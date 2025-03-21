@@ -102,7 +102,7 @@ class CharacterSection extends StatelessWidget {
                   color: Colors.pink,
                   description: 'Everything nice',
                   // imageUrl: 'https://www.popdaily.com.tw/shaper/u/202304/2a1bc013-2744-4a98-8f07-74885e32a5fd.jpeg',
-                  imageUrl: 'assets/images/blossom.jpg',
+                  imageUrl: 'assets/images/Blossom.jpg',
                   icon: Icons.star,
                 ),
                 CharacterCard(
@@ -110,7 +110,7 @@ class CharacterSection extends StatelessWidget {
                   color: Colors.blue,
                   description: 'Sugar',
                   // imageUrl: 'https://www.popdaily.com.tw/shaper/u/202304/0f3d18a2-686b-4ed3-9eb5-f8a953ff0b77.jpeg',
-                  imageUrl: 'assets/images/bubbles.jpg',
+                  imageUrl: 'assets/images/Bubbles.jpg',
                   icon: Icons.favorite,
                 ),
                 CharacterCard(
@@ -118,7 +118,7 @@ class CharacterSection extends StatelessWidget {
                   color: Colors.green,
                   description: 'Spice',
                   // imageUrl: 'https://www.popdaily.com.tw/shaper/u/202304/c8ba330e-edf3-4de5-95a5-05286bc5d6b6.jpeg',
-                  imageUrl: 'assets/images/buttercup.jpg',
+                  imageUrl: 'assets/images/Buttercup.jpg',
                   icon: Icons.bolt,
                 ),
               ],
