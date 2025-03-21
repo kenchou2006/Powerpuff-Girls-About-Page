@@ -92,28 +92,37 @@ class CharacterSection extends StatelessWidget {
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              CharacterCard(
-                name: 'Blossom',
-                color: Colors.pink,
-                icon: Icons.star,
-                description: 'Everything nice',
-              ),
-              CharacterCard(
-                name: 'Bubbles',
-                color: Colors.blue,
-                icon: Icons.favorite,
-                description: 'Sugar',
-              ),
-              CharacterCard(
-                name: 'Buttercup',
-                color: Colors.green,
-                icon: Icons.flash_on,
-                description: 'Spice',
-              ),
-            ],
+          SizedBox(
+            height: 280,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: const [
+                CharacterCard(
+                  name: 'Blossom',
+                  color: Colors.pink,
+                  description: 'Everything nice',
+                  // imageUrl: 'https://www.popdaily.com.tw/shaper/u/202304/2a1bc013-2744-4a98-8f07-74885e32a5fd.jpeg',
+                  imageUrl: 'assets/images/blossom.jpg',
+                  icon: Icons.star,
+                ),
+                CharacterCard(
+                  name: 'Bubbles',
+                  color: Colors.blue,
+                  description: 'Sugar',
+                  // imageUrl: 'https://www.popdaily.com.tw/shaper/u/202304/0f3d18a2-686b-4ed3-9eb5-f8a953ff0b77.jpeg',
+                  imageUrl: 'assets/images/bubbles.jpg',
+                  icon: Icons.favorite,
+                ),
+                CharacterCard(
+                  name: 'Buttercup',
+                  color: Colors.green,
+                  description: 'Spice',
+                  // imageUrl: 'https://www.popdaily.com.tw/shaper/u/202304/c8ba330e-edf3-4de5-95a5-05286bc5d6b6.jpeg',
+                  imageUrl: 'assets/images/buttercup.jpg',
+                  icon: Icons.bolt,
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -124,38 +133,70 @@ class CharacterSection extends StatelessWidget {
 class CharacterCard extends StatelessWidget {
   final String name;
   final Color color;
-  final IconData icon;
   final String description;
+  final String imageUrl;
+  final IconData icon;
 
   const CharacterCard({
     super.key,
     required this.name,
     required this.color,
-    required this.icon,
     required this.description,
+    required this.imageUrl,
+    this.icon = Icons.circle,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      width: 200, // Increased from 160
+      margin: const EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.3)),
       ),
       child: Column(
         children: [
-          CircleAvatar(
-            backgroundColor: color,
-            radius: 30,
-            child: Icon(icon, color: Colors.white),
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+            // child: Image.network(
+            child: Image.asset(
+              imageUrl,
+              height: 200, // Increased from 160
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            name,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(icon, color: color, size: 16),
+                    const SizedBox(width: 4),
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  description,
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Text(description),
         ],
       ),
     );
